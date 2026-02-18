@@ -3,6 +3,7 @@ import Humburger from 'bootstrap-icons/icons/list.svg'
 import mainHTML from './main.html?raw'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <div class="Header">
       <h1 style="display:flex; align-items: center;"><img src=icon.png class="Icon"></img><span id="title">Syunsukezz's Home Page</span></h1>
     </div>
@@ -15,6 +16,17 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="Content">
       
     </div>
+    <footer>
+        <p>Copyright © 2026 Syunsukezz. All rights reserved.</p>
+        <address>
+            <!--mail: <a href="mailto:syunsuke@syunsukezz.com">-->
+            mail: <a href="mailto:x23099xx@aitech.ac.jp">x23099xx@aitech.ac.jp</a>
+        </address>
+        this page is created using <a href="https://vitejs.dev/">Vite</a> and <a href="https://www.typescriptlang.org/">TypeScript</a>.
+        if you find any bugs,mistakes or have any suggestions,report by issues
+        <!-- Place this tag where you want the button to render. -->
+        <a class="github-button" href="https://github.com/syunsukezz/Homepage/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" data-show-count="true" aria-label="Issue syunsukezz/Homepage on GitHub">Issue</a>
+    </footer>
 `
 document.querySelector('#hamburger')?.setAttribute('src', Humburger)
 document.querySelector('.Header')?.addEventListener('click', () => {
