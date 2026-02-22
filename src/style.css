@@ -42,7 +42,7 @@ div.Header {
   border: #2C4251 solid 1px;
   border-radius: 10px;
   padding: 10px;
-  background: #2C4251;
+  background: #5E0B15;
   margin-left: 5%;
   margin-right: 5%;
   
@@ -126,7 +126,77 @@ footer {
   border-radius: 5px;
   width: 100%;
 }
+.Content a {
+  display: block;
+  color: #2C4251;
+  padding :10px;
+  margin: 10px;
+  background-color: #CECFC7;
+  border-radius: 3px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.Content a:hover {
+  color: #CECFC7;
+  background-color: #EF5B5B;
+}
+.Gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  background-color: #2C4251;
 
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
+}
+.Gallery div {
+  background-color: #0094C6;
+  border: #2C4251 solid 1px;
+  border-radius: 5px;
+  padding: 10px;
+  width: 300px;
+  height: auto;
+  text-align: center;
+}
+.Gallery div img {
+  width: 100%;
+  height: 50%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.Gallery div h3 {
+  margin: 0px 0 0px 0;
+  padding: 0px 0px 0px 0px;
+
+}
+.Content p {
+  margin: 0px;
+  padding: 0px 20px 0px 20px;
+  font-size: 1em;
+}
+img {
+  border-radius: 5px;
+  width: 100%;
+}
+video {
+  border-radius: 5px;
+  width: 100%;
+}
+figcaption::before {
+  content: "▲";
+}
+figcaption {
+  text-align: center;
+  font-size: 0.8em;
+  color: #2C4251;
+  margin-top: 5px;
+}
+p {
+  margin: 0px;
+  padding: 20px;
+}
 
 
 

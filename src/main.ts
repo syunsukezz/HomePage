@@ -1,7 +1,12 @@
 import './style.css'
 import Humburger from 'bootstrap-icons/icons/list.svg'
-import mainHTML from './main.html?raw'
+import mainHTML from './Pages/main.html?raw'
+import { loadGalleryItems } from './Gallery/Gallery'
+import { galleryItems } from './Gallery/MainPageGallery'
 
+
+
+// ここで、mainHTML と galleryItems を使用して、ページの初期コンテンツを設定します。
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
      <script async defer src="https://buttons.github.io/buttons.js"></script>
     <div class="Header">
@@ -31,13 +36,10 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 document.querySelector('#hamburger')?.setAttribute('src', Humburger)
 document.querySelector('.Header')?.addEventListener('click', () => {
   LoadContent(mainHTML)
-})
+  loadGalleryItems(galleryItems)
+});
 
-
-
-
-LoadContent(mainHTML)
-
+// コールバックの設定
 const links = document.querySelectorAll('nav a')
 links.forEach(link => {
   link.addEventListener('click', (event) => {
@@ -46,6 +48,8 @@ links.forEach(link => {
     switch (href) {
       case 'index.html':
         LoadContent(mainHTML)
+        loadGalleryItems(galleryItems)
+        
         break
       case 'blog.html':
         LoadContent('<h2>Blog</h2><p>This is the blog page.</p>')
@@ -61,12 +65,17 @@ links.forEach(link => {
 
 
 
+// 初回表示をロード
+LoadContent(mainHTML)
+loadGalleryItems(galleryItems)
 
 
 
 
 
-function LoadContent(innerHTML: string) {
+
+// 関数定義
+export function LoadContent(innerHTML: string) {
   const content = document.querySelector('.Content')
   if (content) {
     content.innerHTML = innerHTML
