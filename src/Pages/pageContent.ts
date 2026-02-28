@@ -1,4 +1,3 @@
-import { LoadContent } from '../main';
 
 export interface Page {
     title: string;
