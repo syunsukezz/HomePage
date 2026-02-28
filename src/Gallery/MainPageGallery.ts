@@ -6,9 +6,12 @@ import noobShogi from "../Resource/noob-shogi.jpg"
 import QueryChan from "../Resource/Query-Chan.png"
 import humanBullet from "../Resource/HumanBullet.png"
 import constallationMachine from "../Resource/constellationMachine.png"
+import analogText from "../Resource/AnalogText.png"
+import dclab from "../Resource/dclab.png"
 
 import { LoadContent } from "../main.ts";
 import { createPageContent } from "../Pages/pageContent.ts";
+
 
 
 
@@ -72,6 +75,18 @@ export const galleryItems: GalleryItem[] = [
             console.log('Constellation Machine gallery item clicked');
             LoadContent('ConstellationMachine.html')
         }
+    },
+    {
+        title:'AnalogText',
+        description:'wootingなどのアナログキーボードの押し込み具合や速度を記録するテキストエディタ。ヒートマップで打ち込まれた文字の強さや速度を可視化する。対応機種はhttps://analogsense.org/JavaScript-SDK/を参照',
+        imageUrl: analogText,
+        link: 'https://ogurilab.github.io/AnalogText/'
+    },
+    {
+        title:'研究室のホームページ',
+        description:'研究室のホームページ。自分の作品ではない',
+        imageUrl: dclab,
+        link: 'https://ogurilab.org'
     }
 
 ];

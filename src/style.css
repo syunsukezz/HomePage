@@ -253,6 +253,7 @@ footer {
   font-size: 0.7em;
 }
 .Gallery div p::first-letter{
+  float :left;
   font-size: 1.5em;
   font-weight: bold;
   color: #CECFC7;
@@ -288,7 +289,9 @@ footer {
   transition: all 0.3s ease;
 }
 .Content p::first-letter {
-  font-size: 1.5em;
+  
+  float :left;
+  font-size: 2em;
   font-weight: bold;
   color: #CECFC7;
   padding: 5px;

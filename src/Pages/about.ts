@@ -1,5 +1,7 @@
 import type { Page } from "./pageContent";
 import cab from '../Resource/cab.jpg'
+import icon from '../Resource/icon.png'
+
 
 export const aboutContent: Page = {
     title: 'このページについて',
@@ -14,7 +16,7 @@ export const aboutContent: Page = {
         },
         {
             type: 'img',
-            src: 'icon.png',
+            src: icon,
             caption: 'Syunsukezzのアイコン。画像のキャプションには、figcaption要素を使っています。'
         },
         {
