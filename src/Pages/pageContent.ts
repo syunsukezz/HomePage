@@ -1,3 +1,5 @@
+import { LoadContent } from '../main';
+
 export interface Page {
     title: string;
     content: Content[];
@@ -18,7 +20,6 @@ export function createPageContent(page: Page): HTMLElement {
         let element: HTMLElement;
         switch (item.type) {
             case 'p':
-
                 element = document.createElement('p');
                 element.textContent = item.src;
                 break;
@@ -54,7 +55,7 @@ export function createPageContent(page: Page): HTMLElement {
             case 'a':
                 element = document.createElement('a') as HTMLAnchorElement;
                 (element as HTMLAnchorElement).href = item.src;
-                element.textContent = item.caption || item.src;
+                element.textContent = item.caption + " - "+ item.src;
                 break;
             default:
                 throw new Error(`Unsupported content type: ${item.type}`);
