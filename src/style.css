@@ -310,6 +310,7 @@ video {
 }
 figure {
   display: inline-block;
+  width: calc(100% - 40px);
   margin: 20px;
   background-color: #aaa;
   border-radius: 5px;
@@ -341,6 +342,48 @@ iframe {
   margin: 20px;
   display: block;
 }
+kbd {
+  display: inline-block;
+  margin: 0 2px;
+  padding: 2px 5px;
+  font-size: 0.9em;
+  color: #2C4251;
+  background: #fffcd9;
+  background: linear-gradient(45deg,rgba(255, 252, 217, 0.97) 0%, rgba(163, 163, 163, 1) 100%);
+  border: #2C4251 solid 1px;
+  border-radius: 3px;
+}
+embed {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  border: 2px solid #2C4251;
+}
+/* コメントボックスの外枠に対して、親要素からの継承をすべてリセットする */ 
+#HCB_comment_box {
+  all: initial; /* すべてのプロパティを初期値に戻す */
+  display: block; /* initialで消える表示形式を再設定 */
+  unicode-bidi: isolate; /* テキスト方向の干渉を防ぐ */
+  background-color: #999;
+  margin: 0px 20px 20px 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+
+/* コメントボックス内の要素は、HTMLCommentBox側のCSSに従うようにする */
+#HCB_comment_box * {
+  all: revert; /* ブラウザ標準またはその要素に直接当たっているスタイル（外部CSS）に戻す */
+  
+}
+#HCB_comment_box p {
+  all: revert;
+}
+#HCB_comment_box h2 {
+  margin: 0px;
+}
+
+
 
 
 

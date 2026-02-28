@@ -9,6 +9,7 @@ import clickSound from './Resource/maou_se_sound_pc01.mp3'
 import menuSound from './Resource/maou_se_sound_switch02.mp3'
 import visitSound from './Resource/maou_se_sound10.mp3'
 import bgm from './Resource/bgm.wav'
+import { aboutContent } from './Pages/about'
 
 type route = {
     path: string;
@@ -23,21 +24,9 @@ let routes: route = [
       return div;
     })()
   },
-  {
-    path: 'blog.html',
-    content: (() => {
-      const div = document.createElement('div');
-      div.innerHTML = '<h2>Blog</h2><p>This is the blog page.</p>';
-      return div;
-    })()
-  },
   { 
     path: 'about.html',
-    content: (() => {
-      const div = document.createElement('div');
-      div.innerHTML = '<h2>About</h2><p>This is the about page.</p>';
-      return div;
-    })()
+    content: createPageContent(aboutContent) 
   },
   {
     path: '舵のまにまに.html',
@@ -47,7 +36,7 @@ let routes: route = [
     path:'Query-chan.html',
     content: (() => {
       const div = document.createElement('div');
-      div.innerHTML = `<h2>Query-chan</h2><p>This is the Query-chan page.</p><iframe
+      div.innerHTML = `<h2>Query-chan Quest!!</h2><p>大学のプログラミング演習で作ったゲーム。<kbd><kbd>F</kbd></kbd>キーで鏡の向きを変えて緑の箱にレーザーを当てよう。操作性が劣悪。</p><iframe
       src="/Unity/Query-Chan Quest!!/index.html"
       style={{
         width: "100%",
@@ -55,7 +44,11 @@ let routes: route = [
         border: "none"
       }}
       allow="fullscreen"
-    />`;
+    /></iframe>
+    <p>MissonClearになってた。誤字った。</p>
+    `
+  
+    ;
       return div;
     })()
   },
@@ -63,7 +56,7 @@ let routes: route = [
     path:'HumanBullet.html',
     content: (() => {
       const div = document.createElement('div');
-      div.innerHTML = `<h2>Human Bullet</h2><p>This is the Human Bullet page.</p><iframe
+      div.innerHTML = `<h2>Human Bullet</h2><p>大学のプログラミング演習で作った作品。まずコースを作らないと遊べない。”コースを作る”からエディタ画面に行って”説明書を見る”をクリックしよう</p><iframe
       src="/Unity/humanBullet/index.html"
       style={{
         width: "100%",
@@ -80,7 +73,7 @@ let routes: route = [
     path:'ミリしら将棋.html',
     content: (() => {
       const div = document.createElement('div');
-      div.innerHTML = `<h2>ミリしら将棋</h2><p>This is the ミリしら将棋 page.</p>
+      div.innerHTML = `<h2>ミリしら将棋</h2><p>1年生の時にTGS2023に展示した作品。</p>
       <a href="https://www.4gamer.net/games/999/G999905/20230922047/">ゲームが4gamerに掲載されました - https://www.4gamer.net/games/999/G999905/20230922047/</a>
       <iframe
       src="/Unity/ミリしら将棋/index.html"
@@ -102,7 +95,7 @@ let routes: route = [
     path:'ConstellationMachine.html',
     content: (() => {
       const div = document.createElement('div');
-      div.innerHTML = `<h2>Constellation Machine</h2><p>This is the Constellation Machine page.</p><iframe
+      div.innerHTML = `<h2>Constellation Machine</h2><p>大学の授業で作った作品。p5.jsで作成された、星座を描くプログラム。</p><iframe
       src="/p5.js/ConstellationMachine/index.html"
       style={{
         width: "100%",
@@ -172,7 +165,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             mail: <a href="mailto:x23099xx@aitech.ac.jp">x23099xx@aitech.ac.jp</a>
         </address>
         this page is created using <a href="https://vitejs.dev/">Vite</a> and <a href="https://www.typescriptlang.org/">TypeScript</a>.
-        if you find any bugs,mistakes or have any suggestions,report by issues
+        If you find any bugs or mistakes, or if you have any suggestions, please report them. 
         <!-- Place this tag where you want the button to render. -->
         <a class="github-button" href="https://github.com/syunsukezz/Homepage/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" data-show-count="true" aria-label="Issue syunsukezz/Homepage on GitHub">Issue</a>
     </footer>
