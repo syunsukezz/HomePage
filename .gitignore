@@ -21,11 +21,14 @@ pnpm-debug.log*
 
 # Build / output
 dist/
+build/
 # Unity の Build フォルダはコミット可能にする
 !public/Unity/**/Build/
 !public/Unity/**/Build/**
+!public/Unity/**/Build/**/*
 
-build/
+
+
 out/
 .vite/
 .vercel/
