@@ -1,4 +1,3 @@
-
 export interface Page {
     title: string;
     content: Content[];
@@ -36,17 +35,28 @@ export function createPageContent(page: Page): HTMLElement {
                 break;
             case 'video':
                 element = document.createElement('figure');
-                const video = document.createElement('video');
-                video.src = item.src;
-                video.controls = true;
-                element.appendChild(video);
-                if (item.caption) {
+                const videoEl = document.createElement('video');
+                videoEl.controls = true;
+                videoEl.playsInline = true;
+                videoEl.preload = 'metadata';
+                videoEl.style.width = '100%';
+                // 明示的に <source> を追加して MIME type を指定
+                const srcEl = document.createElement('source');
+                srcEl.src = item.src;
+                srcEl.type = 'video/mp4';
+                videoEl.appendChild(srcEl);
+                videoEl.addEventListener('error', () => {
+                    console.error('Video load/error:', item.src, videoEl.error);
+                });
+                videoEl.load();
+                element.appendChild(videoEl);
+                 if (item.caption) {
 
-                    const caption = document.createElement('figcaption');
-                    caption.textContent = item.caption;
-                    element.appendChild(caption);
-                }
-                break;
+                     const caption = document.createElement('figcaption');
+                     caption.textContent = item.caption;
+                     element.appendChild(caption);
+                 }
+                 break;
             case 'div':
                 element = document.createElement('div');
                 element.innerHTML = item.src;
