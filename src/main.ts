@@ -45,7 +45,6 @@ let routes: route = [
       }}
       allow="fullscreen"
     /></iframe>
-    <p>MissonClearになってた。誤字った。</p>
     `
   
     ;
@@ -231,6 +230,26 @@ export function LoadContent(path:string) {
   if (route) {
     contentDiv.innerHTML = '';
     contentDiv.appendChild(route.content);
+
+    // 追加：container内の<script>を実行する
+    (function runScripts(container: HTMLElement) {
+      const scripts = Array.from(container.querySelectorAll('script'));
+      scripts.forEach(oldScript => {
+        const newScript = document.createElement('script');
+        // 属性をコピー
+        for (let i = 0; i < oldScript.attributes.length; i++) {
+          const attr = oldScript.attributes[i];
+          newScript.setAttribute(attr.name, attr.value);
+        }
+        if (oldScript.src) {
+          newScript.src = oldScript.src;
+        } else {
+          newScript.textContent = oldScript.textContent;
+        }
+        oldScript.parentNode?.replaceChild(newScript, oldScript);
+      });
+    })(route.content);
+
     safePlay(new Audio(visitSound));
   } else {
     contentDiv.innerHTML = '<h2>404 Not Found</h2><p>The page you are looking for does not exist.</p>';
