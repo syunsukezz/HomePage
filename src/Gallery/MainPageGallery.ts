@@ -6,7 +6,7 @@ import noobShogi from "../Resource/noob-shogi.jpg"
 import QueryChan from "../Resource/Query-Chan.png"
 import humanBullet from "../Resource/HumanBullet.png"
 import constallationMachine from "../Resource/constellationMachine.png"
-import { darinContent } from "../Pages/darin.ts";
+
 import { LoadContent } from "../main.ts";
 import { createPageContent } from "../Pages/pageContent.ts";
 

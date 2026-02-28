@@ -12,13 +12,45 @@ dist
 dist-ssr
 *.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build / output
+dist/
+build/
+out/
+.vite/
+.vercel/
+.vercel_build_output/
+*.tgz
+
+# TypeScript
+*.tsbuildinfo
+
+# Vite / cache / bundlers
+.cache/
+.cache/vite/
+.parcel-cache/
+.cache/esbuild/
+
+# Coverage / tests
+coverage/
+nyc_output/
+.vitest/
+
+# Editor / OS
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.vscode/
+.idea/
+*.iml
+
+# Env
+.env
+.env.*.local
+
+# Misc
+.eslintcache
