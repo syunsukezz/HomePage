@@ -9,7 +9,7 @@ import constallationMachine from "../Resource/constellationMachine.png"
 import analogText from "../Resource/AnalogText.png"
 import dclab from "../Resource/dclab.png"
 
-import { LoadContent } from "../main.ts";
+import { RouteTo } from "../main.ts";
 import { createPageContent } from "../Pages/pageContent.ts";
 
 
@@ -24,7 +24,7 @@ export const galleryItems: GalleryItem[] = [
         link: 'darin.html',
         onClick: () => {         
             console.log('Darin gallery item clicked');
-            LoadContent('舵のまにまに.html')
+            RouteTo('舵のまにまに.html')
 
 
         }
@@ -43,7 +43,7 @@ export const galleryItems: GalleryItem[] = [
         link: 'ミリしら将棋.html',
         onClick: () => {
             console.log('ミリしら将棋 gallery item clicked');
-            LoadContent('ミリしら将棋.html')
+            RouteTo('ミリしら将棋.html')
         }
     },
     {
@@ -53,7 +53,7 @@ export const galleryItems: GalleryItem[] = [
         link: 'Query-chan.html',
         onClick: () => {
             console.log('Query-Chan Quest!! gallery item clicked');
-            LoadContent('Query-chan.html')
+            RouteTo('Query-chan.html')
         }
     },
     {
@@ -63,7 +63,7 @@ export const galleryItems: GalleryItem[] = [
         link: 'HumanBullet.html',
         onClick: () => {
             console.log('Human Bullet gallery item clicked');
-            LoadContent('HumanBullet.html')
+            RouteTo('HumanBullet.html')
         }
     },
     {
@@ -73,7 +73,7 @@ export const galleryItems: GalleryItem[] = [
         link: 'ConstellationMachine.html',
         onClick: () => {
             console.log('Constellation Machine gallery item clicked');
-            LoadContent('ConstellationMachine.html')
+            RouteTo('ConstellationMachine.html')
         }
     },
     {
@@ -97,7 +97,7 @@ if (import.meta.hot) {
         // unknown 経由で安全にキャストし、存在チェックを行う
         const m = mod as unknown as Partial<typeof import('../Pages/darin.ts')>
         if (!m.darinContent) return
-        LoadContent(createPageContent(m.darinContent).innerHTML)
+        RouteTo(createPageContent(m.darinContent).innerHTML)
     })
 }
 

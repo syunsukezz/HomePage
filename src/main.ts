@@ -14,6 +14,7 @@ import { aboutContent } from './Pages/about'
 type route = {
     path: string;
     content: HTMLElement;
+    postLoad?: () => void;  
   }[];
 let routes: route = [
   {
@@ -22,7 +23,10 @@ let routes: route = [
       const div = document.createElement('div');
       div.innerHTML = mainHTML;
       return div;
-    })()
+    })(),
+    postLoad: () => {
+      loadGalleryItems(galleryItems);
+    }
   },
   { 
     path: 'about.html',
@@ -108,39 +112,18 @@ let routes: route = [
   }
 
 ]
+//alert(navigator.userAgent);
 
-// ユーザー操作が行われるまで再生を遅延させるための仕組み
-let userInteracted = false;
-const pendingPlays: Array<() => void> = [];
-function registerUserInteraction() {
-  if (userInteracted) return;
-  userInteracted = true;
-  // イベントキューされた再生を実行
-  pendingPlays.forEach(fn => fn());
-  pendingPlays.length = 0;
-}
-// 最初のユーザー操作（クリック/タッチ/キー入力）を一度だけ待つ
-['click', 'touchstart', 'keydown'].forEach(evt => {
-  window.addEventListener(evt, registerUserInteraction, { once: true, passive: true });
+
+const bgmAudio = new Audio(bgm);
+bgmAudio.volume = 0.2; // 音量を50%に設定
+bgmAudio.loop = true;
+bgmAudio.play().catch((e) => {console.error('Audio play error:', e)
+  alert('BGMの再生に失敗しました。ブラウザのオートプレイポリシーが原因の可能性があります。');
 });
 
-function safePlay(audioEl: HTMLMediaElement) {
-  if (userInteracted) {
-    audioEl.play().catch(() => { /* 無視: ブラウザの制約で再生できない */ });
-  } else {
-    pendingPlays.push(() => audioEl.play().catch(() => {}));
-  }
-}
 
-if (confirm('このサイトはBGMが鳴ります。よろしいですか？')){
-  const bgmAudio = new Audio(bgm);
-  bgmAudio.volume = 0.2; // 音量を50%に設定
-  bgmAudio.loop = true;
-  safePlay(bgmAudio);
-}
-
-
-safePlay(new Audio(visitSound));
+new Audio(visitSound).play().catch((e) => {console.error('Audio play error:', e)});
  
 
 // ここで、mainHTML と galleryItems を使用して、ページの初期コンテンツを設定します。
@@ -171,7 +154,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `
 document.querySelector('#hamburger')?.setAttribute('src', Humburger)
 document.querySelector('.Header')?.addEventListener('click', () => {
-  LoadContent('Home.html')
+  RouteTo('Home.html')
   loadGalleryItems(galleryItems)
 });
 
@@ -183,7 +166,7 @@ routes.forEach(element => {
     link.textContent = element.path.replace('.html', '').toUpperCase();
     link.addEventListener('click', (event) => {
         event.preventDefault();
-        LoadContent(element.path);
+        RouteTo(element.path);
     });
     nav?.appendChild(link);
 
@@ -192,7 +175,10 @@ routes.forEach(element => {
 let audio = new Audio(clickSound);
 document.addEventListener('click', () => {
   audio.currentTime = 0;
-  safePlay(audio);
+  audio.play().catch((e) => {console.error('Audio play error:', e)});
+  if(bgmAudio.paused) {
+    bgmAudio.play().catch((e) => {console.error('Audio play error:', e)});
+  }
 
 });
 let menuAudio = new Audio(menuSound);
@@ -202,7 +188,7 @@ document.addEventListener('mouseover', (e) => {
     console.log('Mouse entered:', ep);
     if(ep.closest(".GalleryItem")&& ep.closest(".GalleryItem") !== cullentHoveredItem) {
       menuAudio.currentTime = 0;
-      safePlay(menuAudio);
+      menuAudio.play().catch(() => {});
       cullentHoveredItem = ep.closest(".GalleryItem") as HTMLElement;
     }
     else if(!ep.closest(".GalleryItem"))
@@ -211,20 +197,25 @@ document.addEventListener('mouseover', (e) => {
     }
 } );
 
-   
+LoadContent(location.href);
 
 
 
 
 
-// 初回表示をロード
-LoadContent('Home.html')
-loadGalleryItems(galleryItems)
+
+
 
 
 
 // 関数定義
-export function LoadContent(path:string) {
+export function RouteTo(path:string) {
+  location.href = path;
+}
+export function LoadContent(rpath:string) {
+  const path = decodeURI(rpath.split('/').pop() || 'Home.html');
+
+  //alert('LoadContent called with path: ' + path); // デバッグ用アラート
   const contentDiv = document.querySelector('.Content')!;
   const route = routes.find(r => r.path === path);
   if (route) {
@@ -249,8 +240,11 @@ export function LoadContent(path:string) {
         oldScript.parentNode?.replaceChild(newScript, oldScript);
       });
     })(route.content);
+    if (route.postLoad) {
+      route.postLoad();
+    }
+    new Audio(visitSound).play().catch((e) => {console.error('Audio play error:', e)});
 
-    safePlay(new Audio(visitSound));
   } else {
     contentDiv.innerHTML = '<h2>404 Not Found</h2><p>The page you are looking for does not exist.</p>';
   }
