@@ -143,8 +143,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <footer>
         <p>Copyright © 2026 Syunsukezz. All rights reserved.</p>
         <address>
-            <!--mail: <a href="mailto:syunsuke@syunsukezz.com">-->
-            mail: <a href="mailto:x23099xx@aitech.ac.jp">x23099xx@aitech.ac.jp</a>
+            mail:<a href="mailto:syunsuke@syunsukezz.com">syunsuke@syunsukezz.com</a> 
+            
         </address>
         this page is created using <a href="https://vitejs.dev/">Vite</a> and <a href="https://www.typescriptlang.org/">TypeScript</a>.
         If you find any bugs or mistakes, or if you have any suggestions, please report them. 
