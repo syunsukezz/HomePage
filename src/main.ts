@@ -49,6 +49,8 @@ let routes: route = [
       }}
       allow="fullscreen"
     /></iframe>
+    楽曲: 魔王魂
+    <a href="https://maou.audio/">https://maou.audio/</a>
     `
   
     ;
@@ -67,7 +69,11 @@ let routes: route = [
         border: "none"
       }}
       allow="fullscreen"
-    />`;
+    />
+    楽曲、効果音: 魔王魂 <a href="https://maou.audio/">https://maou.audio/</a>
+    `
+    
+    ;
       return div;
     })()
   },
