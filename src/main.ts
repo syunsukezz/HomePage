@@ -147,6 +147,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       
     </nav>
     <footer>
+        ページの効果音：<a href="https://maou.audio/">魔王魂</a>
         <p>Copyright © 2026 Syunsukezz. All rights reserved.</p>
         <address>
             mail:<a href="mailto:syunsuke@syunsukezz.com">syunsuke@syunsukezz.com</a> 

@@ -8,6 +8,8 @@ import humanBullet from "../Resource/HumanBullet.png"
 import constallationMachine from "../Resource/constellationMachine.png"
 import analogText from "../Resource/AnalogText.png"
 import dclab from "../Resource/dclab.png"
+import analogtyping from "../Resource/analogtyping.png"
+import Matrix2List from "../Resource/matrix2list.drawio.svg"
 
 import { RouteTo } from "../main.ts";
 import { createPageContent } from "../Pages/pageContent.ts";
@@ -87,6 +89,18 @@ export const galleryItems: GalleryItem[] = [
         description:'研究室のホームページ。自分の作品ではない',
         imageUrl: dclab,
         link: 'https://ogurilab.org'
+    },
+    {
+        title:'AnalogTypingGame',
+        description:'キーを叩く強さがバレるタイピングゲーム。AnalogTextの技術を応用している。対応機種はhttps://analogsense.org/JavaScript-SDK/を参照',
+        imageUrl: analogtyping,
+        link: 'https://typing.syunsukezz.com/'
+    },
+    {
+        title:'Matrix2List',
+        description:'csvの表をマトリックス形式からリスト形式に変換するツール。行の名前と列の名前がそれぞれ１列目と２列目に入る。',
+        imageUrl: Matrix2List,
+        link: 'https://matrix2list.syunsukezz.com/'
     }
 
 ];
