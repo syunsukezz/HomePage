@@ -153,16 +153,16 @@ function updateSoundButton() {
 // ここで、mainHTML と galleryItems を使用して、ページの初期コンテンツを設定します。
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
      <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <div class="Header">
-      <h1 style="display:flex; align-items: center;"><img src=icon.png class="Icon"></img><span id="title">Syunsukezz's Home Page</span></h1>
+    <div class="Header" role="link" tabindex="0" aria-label="ホームへ戻る">
+      <h1 style="display:flex; align-items: center;"><img src=icon.png class="Icon" alt=""></img><span id="title">Syunsukezz's Home Page</span></h1>
     </div>
     
     <div class="Content">
       
     </div>
     <button id="soundToggle" type="button" aria-label="BGMと効果音のON/OFF"></button>
-    <nav>
-      <img id="hamburger"></img>
+    <nav id="mainNav" aria-label="メインメニュー">
+      <button id="hamburger" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mainNav"><img id="hamburgerIcon" alt=""></button>
 
     </nav>
     <footer>
@@ -178,9 +178,41 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         <a class="github-button" href="https://github.com/syunsukezz/Homepage/issues" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-issue-opened" data-size="large" data-show-count="true" aria-label="Issue syunsukezz/Homepage on GitHub">Issue</a>
     </footer>
 `
-document.querySelector('#hamburger')?.setAttribute('src', Humburger)
-document.querySelector('.Header')?.addEventListener('click', () => {
+document.querySelector('#hamburgerIcon')?.setAttribute('src', Humburger)
+const header = document.querySelector<HTMLElement>('.Header');
+header?.addEventListener('click', () => {
   RouteTo('Home.html')
+});
+header?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') RouteTo('Home.html');
+});
+
+// ナビの開閉: ボタンのクリック/タップ・Enter/Space，マウスのホバー，Escで閉じる
+const navEl = document.querySelector<HTMLElement>('nav')!;
+const hamburger = document.querySelector<HTMLButtonElement>('#hamburger')!;
+function setNavOpen(open: boolean) {
+  navEl.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
+  hamburger.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+}
+hamburger.addEventListener('click', () => setNavOpen(!navEl.classList.contains('open')));
+const canHover = window.matchMedia('(hover: hover)');
+navEl.addEventListener('mouseenter', () => { if (canHover.matches) setNavOpen(true); });
+navEl.addEventListener('mouseleave', () => {
+  if (canHover.matches && !navEl.contains(document.activeElement)) setNavOpen(false);
+});
+navEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    setNavOpen(false);
+    hamburger.focus();
+  }
+});
+// メニューの外をタップ/フォーカスしたら閉じる
+document.addEventListener('click', (e) => {
+  if (!navEl.contains(e.target as Node)) setNavOpen(false);
+});
+navEl.addEventListener('focusout', (e) => {
+  if (!navEl.contains(e.relatedTarget as Node | null)) setNavOpen(false);
 });
 
 // コールバックの設定
@@ -191,6 +223,7 @@ routes.forEach(element => {
     link.textContent = element.path.replace('.html', '').toUpperCase();
     link.addEventListener('click', (event) => {
         event.preventDefault();
+        setNavOpen(false);
         RouteTo(element.path);
     });
     nav?.appendChild(link);
