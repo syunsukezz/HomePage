@@ -42,13 +42,8 @@ let routes: route = [
       const div = document.createElement('div');
       div.innerHTML = `<h2>Query-chan Quest!!</h2><p>大学のプログラミング演習で作ったゲーム。<kbd><kbd>F</kbd></kbd>キーで鏡の向きを変えて緑の箱にレーザーを当てよう。操作性が劣悪。</p><iframe
       src="/Unity/Query-Chan Quest!!/index.html"
-      style={{
-        width: "100%",
-        height: "100%",
-        border: "none"
-      }}
       allow="fullscreen"
-    /></iframe>
+    ></iframe>
     楽曲: 魔王魂
     <a href="https://maou.audio/">https://maou.audio/</a>
     `
@@ -63,13 +58,7 @@ let routes: route = [
       const div = document.createElement('div');
       div.innerHTML = `<h2>Human Bullet</h2><p>大学のプログラミング演習で作った作品。まずコースを作らないと遊べない。”コースを作る”からエディタ画面に行って”説明書を見る”をクリックしよう</p><iframe
       src="/Unity/humanBullet/index.html"
-      style={{
-        width: "100%",
-        height: "100%",
-        border: "none"
-      }}
-      allow="fullscreen"
-    />
+      allow="fullscreen"></iframe>
     楽曲、効果音: 魔王魂 <a href="https://maou.audio/">https://maou.audio/</a>
     `
     
@@ -86,14 +75,7 @@ let routes: route = [
       <a href="https://www.4gamer.net/games/999/G999905/20230922047/">ゲームが4gamerに掲載されました - https://www.4gamer.net/games/999/G999905/20230922047/</a>
       <iframe
       src="/Unity/ミリしら将棋/index.html"
-      style={{
-        width: "100%",
-        height: "100%",
-        border: "none"
-      }}
-      allow="fullscreen"
-    />
-    </iframe>
+      allow="fullscreen"></iframe>
     <h3>初期のプロトタイプ</h3>
     <iframe src="https://scratch.mit.edu/projects/865640338/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen style="height: 402px;"></iframe>
     `;
@@ -106,13 +88,7 @@ let routes: route = [
       const div = document.createElement('div');
       div.innerHTML = `<h2>Constellation Machine</h2><p>大学の授業で作った作品。p5.jsで作成された、星座を描くプログラム。</p><iframe
       src="/p5.js/ConstellationMachine/index.html"
-      style={{
-        width: "100%",
-        height: "100%",
-        border: "none"
-      }}
-      allow="fullscreen"
-    />`;
+      allow="fullscreen"></iframe>`;
       return div;
     })()
   }
