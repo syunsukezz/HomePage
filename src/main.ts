@@ -11,6 +11,8 @@ import visitSound from './Resource/maou_se_sound10.mp3'
 import bgm from './Resource/bgm.wav'
 import { aboutContent } from './Pages/about'
 
+const SITE_TITLE = "Syunsukezz's Home Page";
+
 type route = {
     path: string;
     content: HTMLElement;
@@ -216,6 +218,11 @@ LoadContent(location.href);
 
 
 // 関数定義
+// ルートのパス(例: about.html)からタブに表示するタイトルを作る
+function pageTitle(path: string): string {
+  if (path === 'Home.html') return SITE_TITLE;
+  return `${path.replace('.html', '')} | ${SITE_TITLE}`;
+}
 export function RouteTo(path:string) {
   location.href = path;
 }
@@ -228,6 +235,7 @@ export function LoadContent(rpath:string) {
   if (route) {
     contentDiv.innerHTML = '';
     contentDiv.appendChild(route.content);
+    document.title = pageTitle(path);
 
     // 追加：container内の<script>を実行する
     (function runScripts(container: HTMLElement) {
@@ -253,6 +261,7 @@ export function LoadContent(rpath:string) {
     new Audio(visitSound).play().catch((e) => {console.error('Audio play error:', e)});
 
   } else {
+    document.title = `404 Not Found | ${SITE_TITLE}`;
     contentDiv.innerHTML = '<h2>404 Not Found</h2><p>The page you are looking for does not exist.</p>';
   }
 }
