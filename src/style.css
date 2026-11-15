@@ -412,3 +412,24 @@ embed {
   color: #CECFC7;
   background-color: #2C4251;
 }
+
+/* クリックで読み込むiframeのプレースホルダー(iframeと同じ大きさ) */
+.LazyEmbed {
+  display: block;
+  width: calc(100% - 40px);
+  max-height: 1500px;
+  aspect-ratio: 16/9;
+  margin: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2C4251;
+  color: #CECFC7;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+}
+.LazyEmbed:hover,
+.LazyEmbed:focus-visible {
+  background-color: #0094C6;
+  color: #000;
+}
