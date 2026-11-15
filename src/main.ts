@@ -181,7 +181,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 document.querySelector('#hamburger')?.setAttribute('src', Humburger)
 document.querySelector('.Header')?.addEventListener('click', () => {
   RouteTo('Home.html')
-  loadGalleryItems(galleryItems)
 });
 
 // コールバックの設定
@@ -225,6 +224,11 @@ document.addEventListener('mouseover', (e) => {
 } );
 
 LoadContent(location.href);
+// 戻る/進むで履歴が変わったら，リロードせず表示だけ切り替える
+window.addEventListener('popstate', () => {
+  LoadContent(location.href);
+  window.scrollTo(0, 0);
+});
 
 
 
@@ -241,8 +245,18 @@ function pageTitle(path: string): string {
   if (path === 'Home.html') return SITE_TITLE;
   return `${path.replace('.html', '')} | ${SITE_TITLE}`;
 }
+// ページをリロードせずに遷移する(履歴はpushStateで積む．BGMも途切れない)
 export function RouteTo(path:string) {
-  location.href = path;
+  const url = '/' + encodeURI(path);
+  const same = decodeURI(location.pathname) === '/' + path;
+  // 同じページへの遷移は履歴を増やさない
+  if (same) {
+    history.replaceState(null, '', url);
+  } else {
+    history.pushState(null, '', url);
+  }
+  LoadContent(url);
+  window.scrollTo(0, 0);
 }
 export function LoadContent(rpath:string) {
   const path = decodeURI(rpath.split('/').pop() || 'Home.html');
