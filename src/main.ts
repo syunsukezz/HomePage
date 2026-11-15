@@ -46,8 +46,7 @@ let routes: route = [
       src="/Unity/Query-Chan Quest!!/index.html"
       allow="fullscreen"
     ></iframe>
-    楽曲: 魔王魂
-    <a href="https://maou.audio/">https://maou.audio/</a>
+    <div class="Credit">楽曲: 魔王魂 <a href="https://maou.audio/">https://maou.audio/</a></div>
     `
   
     ;
@@ -61,7 +60,7 @@ let routes: route = [
       div.innerHTML = `<h2>Human Bullet</h2><p>大学のプログラミング演習で作った作品。まずコースを作らないと遊べない。”コースを作る”からエディタ画面に行って”説明書を見る”をクリックしよう</p><iframe
       src="/Unity/humanBullet/index.html"
       allow="fullscreen"></iframe>
-    楽曲、効果音: 魔王魂 <a href="https://maou.audio/">https://maou.audio/</a>
+    <div class="Credit">楽曲、効果音: 魔王魂 <a href="https://maou.audio/">https://maou.audio/</a></div>
     `
     
     ;

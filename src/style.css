@@ -451,3 +451,23 @@ embed {
     transition: none;
   }
 }
+
+/* 作品ページのクレジット表記(リンクはボタン状にせず本文に溶け込ませる) */
+.Content .Credit {
+  margin: 20px;
+  font-size: 0.9em;
+}
+.Content .Credit a {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  font-weight: normal;
+  text-decoration: underline;
+}
+.Content .Credit a:hover {
+  color: #EF5B5B;
+  background-color: transparent;
+}
