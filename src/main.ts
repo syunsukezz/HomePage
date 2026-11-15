@@ -121,16 +121,55 @@ let routes: route = [
 //alert(navigator.userAgent);
 
 
+// 音(BGM・効果音)のON/OFF。初回は自動再生ポリシーを避けるためOFFで始め，状態はlocalStorageに保存する
+const SOUND_KEY = 'soundEnabled';
+function loadSoundEnabled(): boolean {
+  try {
+    return localStorage.getItem(SOUND_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+let soundEnabled = loadSoundEnabled();
+
 const bgmAudio = new Audio(bgm);
-bgmAudio.volume = 0.2; // 音量を50%に設定
+bgmAudio.volume = 0.2;
 bgmAudio.loop = true;
-bgmAudio.play().catch((e) => {console.error('Audio play error:', e)
-  alert('BGMの再生に失敗しました。ブラウザのオートプレイポリシーが原因の可能性があります。');
-});
 
+function playSe(audio: HTMLAudioElement) {
+  if (!soundEnabled) return;
+  audio.currentTime = 0;
+  audio.play().catch(() => {});
+}
 
-new Audio(visitSound).play().catch((e) => {console.error('Audio play error:', e)});
- 
+function playBgm() {
+  if (soundEnabled && bgmAudio.paused) {
+    bgmAudio.play().catch(() => {});
+  }
+}
+
+function setSoundEnabled(enabled: boolean) {
+  soundEnabled = enabled;
+  try {
+    localStorage.setItem(SOUND_KEY, enabled ? '1' : '0');
+  } catch {
+    // 保存できなくても動作には影響しない
+  }
+  if (enabled) {
+    playBgm();
+  } else {
+    bgmAudio.pause();
+  }
+  updateSoundButton();
+}
+
+function updateSoundButton() {
+  const btn = document.querySelector<HTMLButtonElement>('#soundToggle');
+  if (!btn) return;
+  btn.textContent = soundEnabled ? '🔊 音: ON' : '🔇 音: OFF';
+  btn.setAttribute('aria-pressed', String(soundEnabled));
+}
+
 
 // ここで、mainHTML と galleryItems を使用して、ページの初期コンテンツを設定します。
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
@@ -142,9 +181,10 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <div class="Content">
       
     </div>
+    <button id="soundToggle" type="button" aria-label="BGMと効果音のON/OFF"></button>
     <nav>
       <img id="hamburger"></img>
-      
+
     </nav>
     <footer>
         ページの効果音：<a href="https://maou.audio/">魔王魂</a>
@@ -179,23 +219,24 @@ routes.forEach(element => {
 
   
 });
+updateSoundButton();
+document.querySelector('#soundToggle')?.addEventListener('click', (event) => {
+  // 文書全体のクリック効果音と二重に鳴らさない
+  event.stopPropagation();
+  setSoundEnabled(!soundEnabled);
+});
 let audio = new Audio(clickSound);
 document.addEventListener('click', () => {
-  audio.currentTime = 0;
-  audio.play().catch((e) => {console.error('Audio play error:', e)});
-  if(bgmAudio.paused) {
-    bgmAudio.play().catch((e) => {console.error('Audio play error:', e)});
-  }
-
+  playSe(audio);
+  // 前回ONにしていた場合，最初のクリック(ユーザー操作)でBGMを再開する
+  playBgm();
 });
 let menuAudio = new Audio(menuSound);
 let cullentHoveredItem: HTMLElement | null = null;
 document.addEventListener('mouseover', (e) => {
     let ep = e.target as HTMLElement;
-    console.log('Mouse entered:', ep);
     if(ep.closest(".GalleryItem")&& ep.closest(".GalleryItem") !== cullentHoveredItem) {
-      menuAudio.currentTime = 0;
-      menuAudio.play().catch(() => {});
+      playSe(menuAudio);
       cullentHoveredItem = ep.closest(".GalleryItem") as HTMLElement;
     }
     else if(!ep.closest(".GalleryItem"))
@@ -250,7 +291,7 @@ export function LoadContent(rpath:string) {
     if (route.postLoad) {
       route.postLoad();
     }
-    new Audio(visitSound).play().catch((e) => {console.error('Audio play error:', e)});
+    playSe(new Audio(visitSound));
 
   } else {
     contentDiv.innerHTML = '<h2>404 Not Found</h2><p>The page you are looking for does not exist.</p>';
