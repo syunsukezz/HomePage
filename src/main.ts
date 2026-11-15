@@ -8,7 +8,7 @@ import { darinContent } from './Pages/darin'
 import clickSound from './Resource/maou_se_sound_pc01.mp3'
 import menuSound from './Resource/maou_se_sound_switch02.mp3'
 import visitSound from './Resource/maou_se_sound10.mp3'
-import bgm from './Resource/bgm.wav'
+import bgm from './Resource/bgm.m4a'
 import { aboutContent } from './Pages/about'
 
 const SITE_TITLE = "Syunsukezz's Home Page";
@@ -111,6 +111,7 @@ function loadSoundEnabled(): boolean {
 let soundEnabled = loadSoundEnabled();
 
 const bgmAudio = new Audio(bgm);
+bgmAudio.preload = "none"; // ONにするまで読み込まない
 bgmAudio.volume = 0.2;
 bgmAudio.loop = true;
 
