@@ -1,14 +1,14 @@
 import type { GalleryItem } from "./Gallery";
 import darin from "../Resource/Darin/Darin.jpg";
-import faceProjection from "../Resource/FaceProjection.png";
+import faceProjection from "../Resource/FaceProjection.webp";
 
 import noobShogi from "../Resource/noob-shogi.jpg"
-import QueryChan from "../Resource/Query-Chan.png"
-import humanBullet from "../Resource/HumanBullet.png"
+import QueryChan from "../Resource/Query-Chan.webp"
+import humanBullet from "../Resource/HumanBullet.webp"
 import constallationMachine from "../Resource/constellationMachine.png"
-import analogText from "../Resource/AnalogText.png"
+import analogText from "../Resource/AnalogText.webp"
 import dclab from "../Resource/dclab.png"
-import analogtyping from "../Resource/analogtyping.png"
+import analogtyping from "../Resource/analogtyping.webp"
 import Matrix2List from "../Resource/matrix2list.drawio.svg"
 
 import { RouteTo } from "../main.ts";
