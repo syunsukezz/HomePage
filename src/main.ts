@@ -96,6 +96,36 @@ let routes: route = [
   }
 
 ]
+
+// 自サイト内のゲーム(Unity/p5.js)のiframeは重いので，クリックされるまで読み込まない。
+// 読み込み済みのiframeも，この関数を再度呼ぶとボタン状態に戻る(ページ離脱時にゲームを止めるため)
+function lazifyIframes(container: HTMLElement) {
+  const heading = container.querySelector('h2')?.textContent ?? 'ゲーム';
+  container.querySelectorAll<HTMLIFrameElement>('iframe').forEach(frame => {
+    const src = frame.getAttribute('src') ?? '';
+    if (!src.startsWith('/')) return; // Scratchなど外部の埋め込みは対象外
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'LazyEmbed';
+    btn.dataset.src = src;
+    btn.dataset.title = `${heading}のゲーム画面`;
+    btn.textContent = '▶ クリックして読み込む';
+    frame.replaceWith(btn);
+  });
+}
+function loadLazyEmbed(btn: HTMLElement) {
+  const frame = document.createElement('iframe');
+  frame.src = btn.dataset.src ?? '';
+  frame.title = btn.dataset.title ?? '';
+  frame.allow = 'fullscreen';
+  btn.replaceWith(frame);
+}
+routes.forEach(r => lazifyIframes(r.content));
+document.addEventListener('click', (e) => {
+  const btn = (e.target as HTMLElement).closest<HTMLElement>('.LazyEmbed');
+  if (btn) loadLazyEmbed(btn);
+});
+let currentContent: HTMLElement | null = null;
 //alert(navigator.userAgent);
 
 
@@ -169,7 +199,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         ページの効果音：<a href="https://maou.audio/">魔王魂</a>
         <p>Copyright © 2026 Syunsukezz. All rights reserved.</p>
         <address>
-            mail:<a href="mailto:syunsuke@syunsukezz.com">syunsuke@syunsukezz.com</a> 
+            mail:<span id="mailLink">(JavaScriptを有効にするか、下のGitHub Issueからご連絡ください)</span> 
             
         </address>
         this page is created using <a href="https://vitejs.dev/">Vite</a> and <a href="https://www.typescriptlang.org/">TypeScript</a>.
@@ -179,6 +209,16 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </footer>
 `
 document.querySelector('#hamburgerIcon')?.setAttribute('src', Humburger)
+
+// メールアドレスはHTML/JSに連続した文字列で置かず，実行時に組み立ててスパム収集ボット対策にする
+const mailLink = document.querySelector<HTMLElement>('#mailLink');
+if (mailLink) {
+  const addr = ['syunsuke', 'syunsukezz.com'].join(String.fromCharCode(64));
+  const a = document.createElement('a');
+  a.href = 'mailto:' + addr;
+  a.textContent = addr;
+  mailLink.replaceWith(a);
+}
 const header = document.querySelector<HTMLElement>('.Header');
 header?.addEventListener('click', () => {
   RouteTo('Home.html')
@@ -298,6 +338,9 @@ export function LoadContent(rpath:string) {
   const contentDiv = document.querySelector('.Content')!;
   const route = routes.find(r => r.path === path);
   if (route) {
+    // 離れるページの読み込み済みiframeはボタンに戻して，ゲームを止める
+    if (currentContent) lazifyIframes(currentContent);
+    currentContent = route.content;
     contentDiv.innerHTML = '';
     contentDiv.appendChild(route.content);
     document.title = pageTitle(path);
