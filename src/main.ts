@@ -199,7 +199,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         ページの効果音：<a href="https://maou.audio/">魔王魂</a>
         <p>Copyright © 2026 Syunsukezz. All rights reserved.</p>
         <address>
-            mail:<a href="mailto:syunsuke@syunsukezz.com">syunsuke@syunsukezz.com</a> 
+            mail:<span id="mailLink">(JavaScriptを有効にするか、下のGitHub Issueからご連絡ください)</span> 
             
         </address>
         this page is created using <a href="https://vitejs.dev/">Vite</a> and <a href="https://www.typescriptlang.org/">TypeScript</a>.
@@ -209,6 +209,16 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </footer>
 `
 document.querySelector('#hamburger')?.setAttribute('src', Humburger)
+
+// メールアドレスはHTML/JSに連続した文字列で置かず，実行時に組み立ててスパム収集ボット対策にする
+const mailLink = document.querySelector<HTMLElement>('#mailLink');
+if (mailLink) {
+  const addr = ['syunsuke', 'syunsukezz.com'].join(String.fromCharCode(64));
+  const a = document.createElement('a');
+  a.href = 'mailto:' + addr;
+  a.textContent = addr;
+  mailLink.replaceWith(a);
+}
 document.querySelector('.Header')?.addEventListener('click', () => {
   RouteTo('Home.html')
 });
