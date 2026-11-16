@@ -1,116 +1,108 @@
+/* デザインシステム「Shiro」: 白基調・枠線なし・面と弱い影で構造を示す */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  border-top:#fff solid 10px;
-  border-left:#999 solid 10px;
-  border-bottom:#000 solid 10px;
-  border-right: #333 solid 10px;
-  background-color: #555;
+  --surface: #ffffff;
+  --surface-dim: #f6f7f9;
+  --surface-container: #eceff3;
+  --ink: #1b1c1f;
+  --ink-muted: #5f6368;
+  --primary: #1565c0;
+  --on-primary: #ffffff;
+  --primary-container: #e3edfb;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-12: 48px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-full: 9999px;
+  --elevation-1: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+  --elevation-2: 0 2px 4px rgba(16, 24, 40, 0.06), 0 4px 12px rgba(16, 24, 40, 0.08);
+  --elevation-3: 0 8px 24px rgba(16, 24, 40, 0.12);
+  font-family: Inter, "Noto Sans JP", system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  background-color: var(--surface);
+  color: var(--ink);
 }
 
 body {
-  padding : 20px;
-  background-color:hsla(195,100%,38%,1);
-  background-image:
-  radial-gradient(at 95% 4%, hsla(67,7%,79%,1) 0px, transparent 50%),
-  radial-gradient(at 7% 97%, hsla(204,29%,24%,1) 0px, transparent 50%); 
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
+  padding: var(--space-4);
+  background-color: var(--surface);
   min-height: 100vh;
   margin: 0;
 }
 
 h1 {
-  font-family: impact;
-  color: #2C4251;
-  
-
-  
+  font-family: inherit;
+  font-weight: 500;
+  color: var(--ink);
 }
 h2, h3 {
-  border-left: #EF5B5B solid 5px;
-  background-color:#0094C6; ;
-  color: #000;
-  margin : 20px;
-  padding: 10px;
+  color: var(--ink);
+  font-weight: 500;
+  margin: var(--space-6);
+  padding: 0;
+  border: none;
 }
+h2 { font-size: 28px; line-height: 36px; }
+h3 { font-size: 20px; line-height: 28px; }
 .Icon {
   width: 1.5em;
   height: 1.5em;
 }
 div.Header {
-  background: #CECFC7;
-  
+  background: transparent;
   width: 100%;
-  margin:20px;
-  padding:0;
-  display:block;
-  border-radius: 5px;
-  
+  margin: 20px 0;
+  padding: 0;
+  display: block;
+  cursor: pointer;
 }
 #app {
-  margin: 0px;
+  margin: 0 auto;
+  max-width: 1040px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: #2C4251 solid 1px;
-  border-radius: 10px;
   padding: 10px;
-  background: #5E0B15;
-  margin-left: 5%;
-  margin-right: 5%;
-  
-  
-  
+  background: transparent;
 }
 nav.open {
-  
-
-  position:fixed;
+  position: fixed;
   top: 10px;
   right: 10px;
-  border: #2C4251 solid 10px;
-  margin-bottom: 20px;
-  background: #CECFC7;
+  background: var(--surface);
   padding: 10px;
-  border-radius: 5px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-3);
   display: flex;
-  width: 20%;
-  height: 70%;
+  width: max(20%, 240px);
+  height: auto;
+  max-height: 80%;
+  box-sizing: border-box;
   transition: 1s;
   flex-direction: column;
-  
-  
-
 }
-nav.open #hamburger{
+nav.open #hamburger {
   width: 2em;
   height: 2em;
   align-self: flex-end;
   flex: none;
 }
-nav{
-  
-  position:fixed;
+nav {
+  position: fixed;
   top: 10px;
   right: 10px;
-  border: #5E0B15 solid 1px;
-  margin-bottom: 0px;
-  background:#EF5B5B ;
-  padding: 0px;
-  border-radius: 5px;
+  background: var(--primary-container);
+  padding: 0;
+  border-radius: var(--radius-full);
   display: flex;
-  width: max(2%, 40px);transition: 1s;
+  width: max(2%, 40px);
+  transition: 1s;
   height: auto;
   aspect-ratio: 1/1;
   flex-direction: column;
-  
-  
-  
-
-
 }
-nav #hamburger{
+nav #hamburger {
   display: block;
   width: 100%;
   height: 100%;
@@ -119,7 +111,7 @@ nav #hamburger{
   background: none;
   cursor: pointer;
 }
-nav #hamburger img{
+nav #hamburger img {
   display: block;
   width: 100%;
   height: 100%;
@@ -133,187 +125,153 @@ nav a {
   height: 0;
   transition: 1s;
 }
-
-
-
-nav.open a{
+nav.open a {
   visibility: visible;
   transition: visibility 0s, font-size 1s, width 1s, height 1s;
-  
   width: 100%;
   height: auto;
-  
-
-  font-size: 1.5em;
-  transition-duration: 1s;
-  
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
   text-decoration: none;
-  color: #2C4251;
-  font-weight: bold; 
-  font-size: auto;
+  color: var(--ink);
+  font-weight: 500;
+}
+nav.open a:hover {
+  color: var(--primary);
+  background-color: var(--primary-container);
 }
 
-#app  .Content {
+#app .Content {
   display: block;
   width: 100%;
-  margin: 0px 0px 0px 0px;
-  padding: 0px;
-  color:#2C4251;
-  background-color: #CECFC7;
-  font-size: 1.2em;
-  line-height: 1.5em;
+  margin: 0;
+  padding: 0;
+  color: var(--ink);
+  background-color: var(--surface);
+  font-size: 16px;
+  line-height: 26px;
   text-align: left;
-  border-radius: 5px;
-  
 }
 footer {
   display: block;
   margin-top: 20px;
   font-size: 0.8em;
-  color: #2C4251;
-  background-color: #CECFC7;
-  border-radius: 5px;
+  color: var(--ink-muted);
   width: 100%;
+  padding: 0 var(--space-6) var(--space-12);
+  box-sizing: border-box;
 }
-.Gallery div{
-  position :relative;
-  
 
-}
-.Gallery div a {
-  text-align: center;
-  justify-content: center;
-  display: block;
-  color: #2C4251;
-  padding :10px;
-  margin: 10px;
-  background-color: #CECFC7;
-  border-radius: 3px;
-  text-decoration: none;
-  font-weight: bold;
-  position: absolute;
-  bottom: 0%;
-  height: auto;
-  left: 10%;
-  right: 10%;
-  border-top: #fff solid 2px;
-  border-bottom: #000 solid 2px;
-  border-left: #aaa solid 2px;
-  border-right: #555 solid 2px;
-  
-
-}
-.Gallery div a:hover {
-  color: #CECFC7;
-  background-color: #2C4251;
-  border-top: #000 solid 2px;
-  border-bottom: #fff solid 2px;
-  border-left: #555 solid 2px;
-  border-right: #aaa solid 2px;
-  border-radius: 3px;
-  transition: all 0.3s ease;
-}
+/* ギャラリー: カードはここだけ。枠線は使わず影と余白で区切る */
 .Gallery {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 24px;
   justify-content: center;
-  background-color: #2C4251;
-
   margin: 20px;
-  padding: 20px;
-  border-radius: 5px;
+  padding: 0;
 }
 .Gallery div {
-  background-color: #0094C6;
-  color: #000;
-  border: #2C4251 solid 1px;
-  border-radius: 5px;
-  padding: 10px;
+  position: relative;
+  background-color: var(--surface);
+  color: var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-1);
+  padding: var(--space-4);
   width: 300px;
   height: 500px;
   text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .Gallery div:hover {
-  background-color: #EF5B5B;
-  color: #2C4251;
-  border: #2C4251 solid 3px;
-  transform: scale(1.05);
-  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
-  border-radius: 10px;
+  box-shadow: var(--elevation-2);
 }
 .Gallery div img {
   width: 100%;
   height: 50%;
-  border-radius: 5px;
+  border-radius: 8px;
   object-fit: cover;
 }
 .Gallery div h3 {
-  margin: 0px 0 5px 0;
-  padding: 0px 0px 0px 0px;
-  border-bottom: #000 solid 1px;
-  border-top: #fff solid 1px;
-  border-left: #aaa solid 1px;
-  border-right: #555 solid 1px;
-  background-color: #CECFC7;
-
+  margin: 12px 0 6px 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 20px;
+  line-height: 28px;
 }
 .Gallery div p {
   text-align: left;
-  margin: 0px;
-  padding: 0px 0px 0px 0px;
-  font-size: 0.7em;
+  margin: 0;
+  padding: 0;
+  font-size: 0.75em;
+  line-height: 1.6;
+  color: var(--ink-muted);
 }
-.Gallery div p::first-letter{
-  float :left;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #CECFC7;
-  padding: 2px; 
-  background-color: #5E0B15;
-  
-  margin: 1px;
+.Gallery div p::first-letter {
+  float: none;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  padding: 0;
+  background: none;
+  margin: 0;
+}
+.Gallery div a {
+  display: block;
+  text-align: center;
+  color: var(--on-primary);
+  background-color: var(--primary);
+  padding: 10px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-weight: 500;
+  position: absolute;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  right: var(--space-4);
+  margin: 0;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+.Gallery div a:hover {
+  box-shadow: var(--elevation-2);
+  background-color: var(--primary);
+}
 
-}
-.Content p{
-  
+.Content p {
   margin: 20px;
-  padding: 0px;
+  padding: 0;
   font-size: 1em;
-  background-color: #aaa;
-  border-radius: 5px;
+  background: none;
+}
+.Content p::first-letter {
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  background: none;
+  float: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  text-shadow: none;
 }
 .Content a {
   display: block;
-  color: #2C4251;
-  font-weight: bold;
+  color: var(--ink);
+  font-weight: 500;
   text-decoration: none;
-  background-color: #fff;
-  margin : 20px;
-  padding: 10px;
-  border-radius: 5px;
-  border-color: #000;
-  border:2px solid
+  background-color: var(--primary-container);
+  margin: var(--space-6);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  border: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 .Content a:hover {
-  color: #fff;
-  background-color: #2C4251;
-  transition: all 0.3s ease;
-}
-.Content p::first-letter {
-  
-  float :left;
-  font-size: 2em;
-  font-weight: bold;
-  color: #CECFC7;
-  padding: 5px;
-  background-color: #EF5B5B;
-  text-shadow: 2px 2px 0px #2C4251;
-  border-right: #2C4251 solid 2px;
-  border-bottom: #2C4251 solid 2px;
-  border-top: #fff solid 2px;
-  border-left: #fff solid 2px ;
-  margin: 1px;
+  color: var(--on-primary);
+  background-color: var(--primary);
 }
 img {
   border-radius: 5px;
@@ -326,10 +284,9 @@ video {
 figure {
   display: inline-block;
   width: calc(100% - 40px);
-  margin: 20px;
-  background-color: #aaa;
-  border-radius: 5px;
-  border: 2px solid #2C4251;
+  margin: var(--space-6);
+  background-color: transparent;
+  border-radius: 8px;
 }
 figcaption::before {
   content: "▲";
@@ -337,7 +294,7 @@ figcaption::before {
 figcaption {
   text-align: center;
   font-size: 1em;
-  color: #2C4251;
+  color: var(--ink-muted);
   margin-top: 0px;
 }
 p {
@@ -347,9 +304,9 @@ p {
 iframe {
   padding : 0px;
 
-  background-color: #aaa;
-  border-radius: 5px;
-  border: none  ;
+  background-color: var(--surface-container);
+  border-radius: 8px;
+  border: none;
   width: calc(100% - 40px);
   max-height: 1500px;
   aspect-ratio: 16/9;
@@ -362,27 +319,26 @@ kbd {
   margin: 0 2px;
   padding: 2px 5px;
   font-size: 0.9em;
-  color: #2C4251;
-  background: #fffcd9;
-  background: linear-gradient(45deg,rgba(255, 252, 217, 0.97) 0%, rgba(163, 163, 163, 1) 100%);
-  border: #2C4251 solid 1px;
-  border-radius: 3px;
+  color: var(--ink);
+  background: var(--surface-dim);
+  border: 1px solid var(--surface-container);
+  border-bottom-width: 2px;
+  border-radius: 4px;
 }
 embed {
   width: 100%;
   height: auto;
-  border-radius: 5px;
-  border: 2px solid #2C4251;
+  border-radius: 8px;
 }
 /* コメントボックスの外枠に対して、親要素からの継承をすべてリセットする */ 
 #HCB_comment_box {
   all: initial; /* すべてのプロパティを初期値に戻す */
   display: block; /* initialで消える表示形式を再設定 */
   unicode-bidi: isolate; /* テキスト方向の干渉を防ぐ */
-  background-color: #999;
+  background-color: var(--surface-dim);
   margin: 0px 20px 20px 20px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 
@@ -410,19 +366,17 @@ embed {
   z-index: 10;
   padding: 6px 12px;
   font-size: 0.9em;
-  font-weight: bold;
-  color: #2C4251;
-  background-color: #CECFC7;
-  border-top: #fff solid 2px;
-  border-bottom: #000 solid 2px;
-  border-left: #aaa solid 2px;
-  border-right: #555 solid 2px;
-  border-radius: 3px;
+  font-weight: 500;
+  color: var(--ink);
+  background-color: var(--surface);
+  border: none;
+  box-shadow: 0 1px 4px rgba(44, 66, 81, 0.2);
+  border-radius: 999px;
   cursor: pointer;
 }
 #soundToggle:hover {
-  color: #CECFC7;
-  background-color: #2C4251;
+  color: var(--on-primary);
+  background-color: var(--ink);
 }
 
 /* クリックで読み込むiframeのプレースホルダー(iframeと同じ大きさ) */
@@ -433,17 +387,17 @@ embed {
   aspect-ratio: 16/9;
   margin: 20px;
   border: none;
-  border-radius: 5px;
-  background-color: #2C4251;
-  color: #CECFC7;
+  border-radius: 8px;
+  background-color: var(--ink);
+  color: var(--on-primary);
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: 500;
   cursor: pointer;
 }
 .LazyEmbed:hover,
 .LazyEmbed:focus-visible {
-  background-color: #0094C6;
-  color: #000;
+  background-color: var(--primary);
+  color: var(--on-primary);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -468,6 +422,6 @@ embed {
   text-decoration: underline;
 }
 .Content .Credit a:hover {
-  color: #EF5B5B;
+  color: var(--primary);
   background-color: transparent;
 }
