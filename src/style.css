@@ -75,8 +75,10 @@ nav.open {
   border-radius: var(--radius-md);
   box-shadow: var(--elevation-3);
   display: flex;
-  width: 20%;
-  height: 70%;
+  width: max(20%, 240px);
+  height: auto;
+  max-height: 80%;
+  box-sizing: border-box;
   transition: 1s;
   flex-direction: column;
 }
@@ -128,13 +130,16 @@ nav.open a {
   transition: visibility 0s, font-size 1s, width 1s, height 1s;
   width: 100%;
   height: auto;
-  font-size: 1.5em;
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
   text-decoration: none;
   color: var(--ink);
   font-weight: 500;
 }
 nav.open a:hover {
   color: var(--primary);
+  background-color: var(--primary-container);
 }
 
 #app .Content {
@@ -154,6 +159,8 @@ footer {
   font-size: 0.8em;
   color: var(--ink-muted);
   width: 100%;
+  padding: 0 var(--space-6) var(--space-12);
+  box-sizing: border-box;
 }
 
 /* ギャラリー: カードはここだけ。枠線は使わず影と余白で区切る */
