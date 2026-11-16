@@ -1,34 +1,50 @@
-/* 配色トークン: 色はここだけで管理する */
+/* デザインシステム「Shiro」: 白基調・枠線なし・面と弱い影で構造を示す */
 :root {
-  --bg: #f4f1ea;
   --surface: #ffffff;
-  --text: #2c4251;
-  --muted: #6b7a85;
-  --accent: #ef5b5b;
-  --accent-soft: #fbe3e3;
-  --line: #e2ddd2;
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
+  --surface-dim: #f6f7f9;
+  --surface-container: #eceff3;
+  --ink: #1b1c1f;
+  --ink-muted: #5f6368;
+  --primary: #1565c0;
+  --on-primary: #ffffff;
+  --primary-container: #e3edfb;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-12: 48px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-full: 9999px;
+  --elevation-1: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+  --elevation-2: 0 2px 4px rgba(16, 24, 40, 0.06), 0 4px 12px rgba(16, 24, 40, 0.08);
+  --elevation-3: 0 8px 24px rgba(16, 24, 40, 0.12);
+  font-family: Inter, "Noto Sans JP", system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  background-color: var(--surface);
+  color: var(--ink);
 }
 
 body {
-  padding: 20px;
-  background-color: var(--bg);
+  padding: var(--space-4);
+  background-color: var(--surface);
   min-height: 100vh;
   margin: 0;
 }
 
 h1 {
-  font-family: impact;
-  color: var(--text);
+  font-family: inherit;
+  font-weight: 500;
+  color: var(--ink);
 }
 h2, h3 {
-  color: var(--text);
-  margin: 20px;
-  padding: 0 0 8px 0;
-  border-bottom: 2px solid var(--accent);
+  color: var(--ink);
+  font-weight: 500;
+  margin: var(--space-6);
+  padding: 0;
+  border: none;
 }
+h2 { font-size: 28px; line-height: 36px; }
+h3 { font-size: 20px; line-height: 28px; }
 .Icon {
   width: 1.5em;
   height: 1.5em;
@@ -43,7 +59,7 @@ div.Header {
 }
 #app {
   margin: 0 auto;
-  max-width: 1100px;
+  max-width: 1040px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,8 +72,8 @@ nav.open {
   right: 10px;
   background: var(--surface);
   padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(44, 66, 81, 0.18);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-3);
   display: flex;
   width: 20%;
   height: 70%;
@@ -74,9 +90,9 @@ nav {
   position: fixed;
   top: 10px;
   right: 10px;
-  background: var(--accent);
+  background: var(--primary-container);
   padding: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-full);
   display: flex;
   width: max(2%, 40px);
   transition: 1s;
@@ -114,11 +130,11 @@ nav.open a {
   height: auto;
   font-size: 1.5em;
   text-decoration: none;
-  color: var(--text);
-  font-weight: bold;
+  color: var(--ink);
+  font-weight: 500;
 }
 nav.open a:hover {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 #app .Content {
@@ -126,19 +142,17 @@ nav.open a:hover {
   width: 100%;
   margin: 0;
   padding: 0;
-  color: var(--text);
+  color: var(--ink);
   background-color: var(--surface);
-  font-size: 1.2em;
-  line-height: 1.6em;
+  font-size: 16px;
+  line-height: 26px;
   text-align: left;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(44, 66, 81, 0.08);
 }
 footer {
   display: block;
   margin-top: 20px;
   font-size: 0.8em;
-  color: var(--muted);
+  color: var(--ink-muted);
   width: 100%;
 }
 
@@ -154,18 +168,17 @@ footer {
 .Gallery div {
   position: relative;
   background-color: var(--surface);
-  color: var(--text);
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(44, 66, 81, 0.14);
-  padding: 12px;
+  color: var(--ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-1);
+  padding: var(--space-4);
   width: 300px;
   height: 500px;
   text-align: center;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .Gallery div:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(44, 66, 81, 0.2);
+  box-shadow: var(--elevation-2);
 }
 .Gallery div img {
   width: 100%;
@@ -178,7 +191,8 @@ footer {
   padding: 0;
   border: none;
   background: none;
-  font-size: 1.1em;
+  font-size: 20px;
+  line-height: 28px;
 }
 .Gallery div p {
   text-align: left;
@@ -186,7 +200,7 @@ footer {
   padding: 0;
   font-size: 0.75em;
   line-height: 1.6;
-  color: var(--muted);
+  color: var(--ink-muted);
 }
 .Gallery div p::first-letter {
   float: none;
@@ -200,22 +214,23 @@ footer {
 .Gallery div a {
   display: block;
   text-align: center;
-  color: #fff;
-  background-color: var(--accent);
-  padding: 8px;
-  border-radius: 8px;
+  color: var(--on-primary);
+  background-color: var(--primary);
+  padding: 10px;
+  border-radius: var(--radius-full);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
   position: absolute;
-  bottom: 12px;
-  left: 12px;
-  right: 12px;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  right: var(--space-4);
   margin: 0;
   border: none;
   transition: background-color 0.2s ease;
 }
 .Gallery div a:hover {
-  background-color: var(--text);
+  box-shadow: var(--elevation-2);
+  background-color: var(--primary);
 }
 
 .Content p {
@@ -237,19 +252,19 @@ footer {
 }
 .Content a {
   display: block;
-  color: var(--text);
-  font-weight: bold;
+  color: var(--ink);
+  font-weight: 500;
   text-decoration: none;
-  background-color: var(--accent-soft);
-  margin: 20px;
-  padding: 10px 14px;
-  border-radius: 8px;
+  background-color: var(--primary-container);
+  margin: var(--space-6);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
   border: none;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 .Content a:hover {
-  color: #fff;
-  background-color: var(--text);
+  color: var(--on-primary);
+  background-color: var(--primary);
 }
 img {
   border-radius: 5px;
@@ -262,7 +277,7 @@ video {
 figure {
   display: inline-block;
   width: calc(100% - 40px);
-  margin: 20px;
+  margin: var(--space-6);
   background-color: transparent;
   border-radius: 8px;
 }
@@ -272,7 +287,7 @@ figcaption::before {
 figcaption {
   text-align: center;
   font-size: 1em;
-  color: var(--muted);
+  color: var(--ink-muted);
   margin-top: 0px;
 }
 p {
@@ -282,7 +297,7 @@ p {
 iframe {
   padding : 0px;
 
-  background-color: var(--line);
+  background-color: var(--surface-container);
   border-radius: 8px;
   border: none;
   width: calc(100% - 40px);
@@ -297,9 +312,9 @@ kbd {
   margin: 0 2px;
   padding: 2px 5px;
   font-size: 0.9em;
-  color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--surface-dim);
+  border: 1px solid var(--surface-container);
   border-bottom-width: 2px;
   border-radius: 4px;
 }
@@ -313,7 +328,7 @@ embed {
   all: initial; /* すべてのプロパティを初期値に戻す */
   display: block; /* initialで消える表示形式を再設定 */
   unicode-bidi: isolate; /* テキスト方向の干渉を防ぐ */
-  background-color: var(--bg);
+  background-color: var(--surface-dim);
   margin: 0px 20px 20px 20px;
   padding: 10px;
   border-radius: 8px;
@@ -344,8 +359,8 @@ embed {
   z-index: 10;
   padding: 6px 12px;
   font-size: 0.9em;
-  font-weight: bold;
-  color: var(--text);
+  font-weight: 500;
+  color: var(--ink);
   background-color: var(--surface);
   border: none;
   box-shadow: 0 1px 4px rgba(44, 66, 81, 0.2);
@@ -353,8 +368,8 @@ embed {
   cursor: pointer;
 }
 #soundToggle:hover {
-  color: #fff;
-  background-color: var(--text);
+  color: var(--on-primary);
+  background-color: var(--ink);
 }
 
 /* クリックで読み込むiframeのプレースホルダー(iframeと同じ大きさ) */
@@ -366,16 +381,16 @@ embed {
   margin: 20px;
   border: none;
   border-radius: 8px;
-  background-color: var(--text);
-  color: #fff;
+  background-color: var(--ink);
+  color: var(--on-primary);
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: 500;
   cursor: pointer;
 }
 .LazyEmbed:hover,
 .LazyEmbed:focus-visible {
-  background-color: var(--accent);
-  color: #fff;
+  background-color: var(--primary);
+  color: var(--on-primary);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -400,6 +415,6 @@ embed {
   text-decoration: underline;
 }
 .Content .Credit a:hover {
-  color: var(--accent);
+  color: var(--primary);
   background-color: transparent;
 }
