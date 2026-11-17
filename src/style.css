@@ -44,6 +44,12 @@ h2, h3 {
   border: none;
 }
 h2 { font-size: 28px; line-height: 36px; }
+/* 見出しごとの区切り線(各ページ先頭の見出しは除く) */
+h2:not(:first-child) {
+  margin-top: var(--space-12);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--surface-container);
+}
 h3 { font-size: 20px; line-height: 28px; }
 .Icon {
   width: 1.5em;
@@ -58,8 +64,7 @@ div.Header {
   cursor: pointer;
 }
 #app {
-  margin: 0 auto;
-  max-width: 1040px;
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
