@@ -10,8 +10,7 @@ import menuSound from './Resource/maou_se_sound_switch02.mp3'
 import visitSound from './Resource/maou_se_sound10.mp3'
 import bgm from './Resource/bgm.m4a'
 import { aboutContent } from './Pages/about'
-
-const SITE_TITLE = "Syunsukezz's Home Page";
+import { applySeo } from './seo'
 
 type route = {
     path: string;
@@ -120,6 +119,8 @@ function loadLazyEmbed(btn: HTMLElement) {
   btn.replaceWith(frame);
 }
 routes.forEach(r => lazifyIframes(r.content));
+// 静的出力(scripts/prerender.mjs)が全ルートを列挙するために参照する
+(window as unknown as { __ROUTE_PATHS__: string[] }).__ROUTE_PATHS__ = routes.map(r => r.path);
 document.addEventListener('click', (e) => {
   const btn = (e.target as HTMLElement).closest<HTMLElement>('.LazyEmbed');
   if (btn) loadLazyEmbed(btn);
@@ -312,11 +313,6 @@ window.addEventListener('popstate', () => {
 
 
 // 関数定義
-// ルートのパス(例: about.html)からタブに表示するタイトルを作る
-function pageTitle(path: string): string {
-  if (path === 'Home.html') return SITE_TITLE;
-  return `${path.replace('.html', '')} | ${SITE_TITLE}`;
-}
 // ページをリロードせずに遷移する(履歴はpushStateで積む．BGMも途切れない)
 export function RouteTo(path:string) {
   const url = '/' + encodeURI(path);
@@ -342,7 +338,7 @@ export function LoadContent(rpath:string) {
     currentContent = route.content;
     contentDiv.innerHTML = '';
     contentDiv.appendChild(route.content);
-    document.title = pageTitle(path);
+    applySeo(path, true);
 
     // 追加：container内の<script>を実行する
     (function runScripts(container: HTMLElement) {
@@ -368,7 +364,7 @@ export function LoadContent(rpath:string) {
     playSe(new Audio(visitSound));
 
   } else {
-    document.title = `404 Not Found | ${SITE_TITLE}`;
+    applySeo(path, false);
     contentDiv.innerHTML = '<h2>404 Not Found</h2><p>The page you are looking for does not exist.</p>';
   }
 }
